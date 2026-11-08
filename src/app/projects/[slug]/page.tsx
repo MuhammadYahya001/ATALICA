@@ -5,6 +5,10 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { getAllProjects, getProjectBySlug } from "@/lib/projects";
 import ScrollReveal from "@/components/ScrollReveal";
+import SplitText from "@/components/motion/SplitText";
+import ImageReveal from "@/components/motion/ImageReveal";
+import CTASection from "@/components/CTASection";
+import AtmosphereLayer from "@/components/atmosphere/AtmosphereLayer";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -44,7 +48,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   return (
     <div className="bg-[#F7F6F2] pt-28 sm:pt-36">
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-10 sm:pb-14">
+      <section className="atmosphere-host relative isolate max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-10 sm:pb-14 bg-[#E8E6E1]">
+        <AtmosphereLayer ghost={String(index + 1).padStart(2, "0")} index={String(index + 1).padStart(2, "0")} blueprint />
         <Link
           href="/projects"
           className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-montserrat font-medium text-gray-500 hover:text-[#1A1A1A] transition-colors mb-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C98A5B]"
@@ -53,25 +58,28 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           <span>All Projects</span>
         </Link>
         <div className="max-w-4xl space-y-4">
-          <p className="text-[#C98A5B] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium">
+          <p className="text-[#0D2B4C] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium">
             Design inspiration <span className="px-2 text-[#C98A5B]/50">/</span> {String(index + 1).padStart(2, "0")} ? 09
           </p>
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1A1A] leading-[1.1] tracking-tight">
-            {project.title}
+            <SplitText text={project.title} />
           </h1>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-20 sm:pb-28">
+      <section className="atmosphere-host relative isolate max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-20 sm:pb-28">
+        <AtmosphereLayer blueprint />
         <ScrollReveal className={`relative w-full overflow-hidden rounded-[24px] bg-[#E8E6E1] sm:rounded-[34px] ${project.imageOrientation === "portrait" ? "mx-auto max-w-4xl aspect-[3/4]" : "aspect-[4/3] sm:aspect-[16/9]"}`}>
-          <ResponsiveImage
-            src={project.image}
-            alt={`${project.categoryLabel} design reference: ${project.title}`}
-            fill
-            priority
-            sizes="(max-width: 768px) 100vw, 90vw"
-            className="object-cover"
-          />
+          <ImageReveal className="absolute inset-0">
+            <ResponsiveImage
+              src={project.image}
+              alt={`${project.categoryLabel} design reference: ${project.title}`}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 90vw"
+              className="object-cover"
+            />
+          </ImageReveal>
         </ScrollReveal>
         <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8E6E1] pb-6">
           <p className="text-xs text-gray-500 font-light">{project.categoryLabel}</p>
@@ -97,6 +105,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           ) : <span />}
         </nav>
       </section>
+
+      <CTASection title="Planning a project?" description="Tell us about the space you have in mind." />
     </div>
   );
 }

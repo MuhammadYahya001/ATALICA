@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { Project, CATEGORIES } from "@/lib/projects";
+import { AnimatePresence } from "framer-motion";
+import { CardGrid, CardReveal } from "@/components/motion/Reveal";
 
 interface ProjectGalleryProps {
   projects: Project[];
@@ -48,17 +50,20 @@ export default function ProjectGallery({
       </div>
 
       {filteredProjects.length > 0 ? (
-        <div className="grid grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-7 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">
-          {filteredProjects.map((project, idx) => (
-            <div
-              key={project.id}
-              className={`animate-gallery-enter ${idx % 3 === 1 ? "lg:mt-16" : idx % 3 === 2 ? "lg:mt-8" : ""}`}
-              style={{ animationDelay: `${Math.min(idx, 8) * 55}ms` }}
-            >
-              <ProjectCard project={project} priority={idx < 2} />
-            </div>
-          ))}
-        </div>
+        <CardGrid layout className="project-grid grid grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-x-7 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-14">
+          <AnimatePresence initial={false} mode="popLayout">
+            {filteredProjects.map((project, idx) => (
+              <CardReveal
+                key={project.id}
+                index={idx}
+                layout
+                className={idx % 3 === 1 ? "lg:mt-16" : idx % 3 === 2 ? "lg:mt-8" : ""}
+              >
+                <ProjectCard project={project} priority={idx < 2} />
+              </CardReveal>
+            ))}
+          </AnimatePresence>
+        </CardGrid>
       ) : (
         <div className="text-center py-20 bg-white border border-[#E8E6E1] rounded-sm p-8">
           <p className="text-gray-500 text-sm font-light">
@@ -66,7 +71,7 @@ export default function ProjectGallery({
           </p>
           <button
             onClick={() => setSelectedCategory("all")}
-            className="mt-4 text-xs font-montserrat uppercase tracking-[0.18em] text-[#C98A5B] hover:underline"
+            className="mt-4 text-xs font-montserrat uppercase tracking-[0.18em] text-[#0D2B4C] hover:underline"
           >
             View All Projects
           </button>

@@ -1,13 +1,16 @@
 import Link from "next/link";
 import Logo from "./Logo";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
+import ScrollReveal from "@/components/motion/Reveal";
+import AtmosphereLayer from "@/components/atmosphere/AtmosphereLayer";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#081C33] text-white border-t border-[#0D2B4C]">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-20">
+    <footer className="atmosphere-host relative isolate overflow-hidden bg-[#0D2B4C] text-white border-t border-[#081C33]">
+      <AtmosphereLayer tone="dark" blueprint grid />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-14">
           {/* Brand & Statement */}
           <div className="lg:col-span-5 space-y-5">
@@ -15,7 +18,7 @@ export default function Footer() {
             <p className="text-white/60 text-sm font-light leading-relaxed max-w-sm pt-2">
               Interior design, construction, and décor across Multan, Islamabad, and Rawalpindi.
             </p>
-            <p className="text-[11px] text-[#C98A5B] uppercase tracking-[0.2em] font-montserrat font-medium">
+            <p className="text-[11px] text-[#DBA075] uppercase tracking-[0.2em] font-montserrat font-medium">
               Multan · Islamabad · Rawalpindi
             </p>
           </div>
@@ -80,6 +83,9 @@ export default function Footer() {
                 <a href="mailto:official@atalica.com.pk" className="text-white hover:text-[#C98A5B] transition-colors">
                   official@atalica.com.pk
                 </a>
+                <a href="mailto:official.atalica@gmail.com" className="block text-white hover:text-[#C98A5B] transition-colors">
+                  official.atalica@gmail.com
+                </a>
               </div>
               <div>
                 <span className="block text-white/40 text-[10px] uppercase tracking-[0.2em] font-montserrat mb-0.5">
@@ -98,10 +104,16 @@ export default function Footer() {
           </div>
         </div>
 
+        <ScrollReveal>
+          <p aria-hidden="true" className="mt-16 overflow-hidden font-montserrat text-[clamp(4rem,16vw,13rem)] font-semibold leading-[0.76] tracking-[-0.09em] text-white/[0.045]">
+            ATALICA
+          </p>
+        </ScrollReveal>
+
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[11px] text-white/40 font-light">
           <p>© {currentYear} ATALICA. Interiors · Construction · Décor.</p>
-          <p className="text-[#C98A5B]/70">Raheel Raza · Founder · 15+ years of hands-on experience</p>
+          <p className="text-[#DBA075]/90">Raheel Raza · Founder · 15+ years of hands-on experience</p>
         </div>
       </div>
     </footer>

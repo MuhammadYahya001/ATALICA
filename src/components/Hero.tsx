@@ -3,6 +3,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import fs from "fs";
 import path from "path";
+import SplitText from "@/components/motion/SplitText";
+import ImageReveal from "@/components/motion/ImageReveal";
+import ParallaxImage from "@/components/motion/ParallaxImage";
+import MagneticButton from "@/components/motion/MagneticButton";
 
 export default function Hero() {
   const heroAiPath = path.join(process.cwd(), "public", "images", "optimized", "atalica-hero-ai.webp");
@@ -16,15 +20,19 @@ export default function Hero() {
     <section className="relative h-screen min-h-[640px] max-h-[1080px] flex items-end overflow-hidden bg-[#081C33]">
       {/* Background photograph */}
       <div className="absolute inset-0">
-        <ResponsiveImage
-          src={HERO_IMAGE}
-          alt={HERO_IMAGE_ALT}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center animate-hero-image"
-          quality={92}
-        />
+        <ParallaxImage className="absolute inset-0">
+          <ImageReveal className="absolute inset-0">
+            <ResponsiveImage
+              src={HERO_IMAGE}
+              alt={HERO_IMAGE_ALT}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center animate-hero-image"
+              quality={92}
+            />
+          </ImageReveal>
+        </ParallaxImage>
         {/* Subtle, restrained vignette gradient — text legibility without opaque dark boxes */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#081C33]/85 via-[#081C33]/30 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#081C33]/50 via-[#081C33]/15 to-transparent" />
@@ -37,14 +45,14 @@ export default function Hero() {
             01 <span className="mx-2 text-[#C98A5B]">/</span> ATALICA STUDIO
           </p>
           {/* Restrained Descriptor */}
-          <p className="hero-copy text-[#C98A5B] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium mb-4 sm:mb-5" style={{ animationDelay: "45ms" }}>
+          <p className="hero-copy text-[#DBA075] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium mb-4 sm:mb-5" style={{ animationDelay: "45ms" }}>
             INTERIORS · CONSTRUCTION · DÉCOR
           </p>
 
           {/* Headline */}
           <h1 className="hero-copy font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-white leading-[1.08] tracking-tight mb-5 sm:mb-6" style={{ animationDelay: "90ms" }}>
-            Spaces that<br />
-            <span className="italic">Inspire.</span>
+            <SplitText text="Spaces that" /><br />
+            <span className="italic"><SplitText text="Inspire." /></span>
           </h1>
 
           {/* Supporting copy */}
@@ -54,13 +62,13 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="hero-copy flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6" style={{ animationDelay: "190ms" }}>
-            <Link
+            <MagneticButton
               href="/projects"
               className="inline-flex items-center gap-3 px-7 py-3.5 bg-white hover:bg-[#F7F6F2] text-[#0D2B4C] text-[11px] uppercase tracking-[0.2em] font-montserrat font-semibold rounded-sm transition-colors duration-200 group shadow-sm"
             >
               <span>Explore Our Work</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
+            </MagneticButton>
 
             <Link
               href="/consultation"

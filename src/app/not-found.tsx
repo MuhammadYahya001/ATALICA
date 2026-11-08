@@ -1,10 +1,13 @@
 import Link from "next/link";
 
+import AtmosphereLayer from "@/components/atmosphere/AtmosphereLayer";
+
 export default function NotFound() {
   return (
-    <div className="min-h-[75vh] flex items-center justify-center bg-[#F7F6F2] px-6 py-20 pt-32">
-      <div className="max-w-md w-full bg-white p-10 sm:p-14 border border-[#E8E6E1] text-center space-y-6">
-        <p className="text-[#C98A5B] text-[10px] uppercase tracking-[0.28em] font-montserrat font-medium">
+    <div className="atmosphere-host relative isolate min-h-[75vh] flex items-center justify-center bg-[#F7F6F2] px-6 py-20 pt-32">
+      <AtmosphereLayer ghost="404" blueprint grid />
+      <div className="relative z-10 max-w-md w-full bg-[#FAF9F6] p-10 sm:p-14 border border-[#E8E6E1] text-center space-y-6">
+        <p className="text-[#0D2B4C] text-[10px] uppercase tracking-[0.28em] font-montserrat font-medium">
           404 — Not Found
         </p>
         <h1 className="font-serif text-3xl sm:text-4xl text-[#1A1A1A] font-normal">

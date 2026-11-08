@@ -112,7 +112,7 @@ export default function ConsultationForm({ initialService = "" }: ConsultationFo
 
   if (successResponse) {
     return (
-      <div role="status" aria-live="polite" className="bg-white border border-[#E8E6E1] p-8 sm:p-14 text-center max-w-2xl mx-auto space-y-6">
+      <div role="status" aria-live="polite" className="form-status bg-[#FAF9F6] border border-[#E8E6E1] p-8 sm:p-14 text-center max-w-2xl mx-auto space-y-6">
         <div className="w-12 h-12 bg-[#F7F6F2] text-[#C98A5B] rounded-full flex items-center justify-center mx-auto border border-[#E8E6E1]">
           <CheckCircle2 className="w-6 h-6" />
         </div>
@@ -172,7 +172,7 @@ export default function ConsultationForm({ initialService = "" }: ConsultationFo
       <form
       onSubmit={handleSubmit}
       noValidate
-      className="bg-white border border-[#E8E6E1] p-8 sm:p-12 max-w-2xl mx-auto space-y-8"
+      className="bg-[#FAF9F6] border border-[#E8E6E1] p-8 sm:p-12 max-w-2xl mx-auto space-y-8"
     >
       {/* Honeypot */}
       <div className="hidden" aria-hidden="true">
@@ -189,7 +189,7 @@ export default function ConsultationForm({ initialService = "" }: ConsultationFo
       </div>
 
       {errorMessage && (
-        <div role="alert" aria-live="assertive" className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs flex items-start gap-3">
+        <div role="alert" aria-live="assertive" className="form-status p-4 bg-red-50 border border-red-200 text-red-800 text-xs flex items-start gap-3">
           <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-600 mt-0.5" />
           <div className="flex-1">
             <p className="font-medium">{errorMessage}</p>

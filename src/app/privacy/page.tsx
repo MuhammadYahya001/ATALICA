@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SplitText from "@/components/motion/SplitText";
+import AtmosphereLayer from "@/components/atmosphere/AtmosphereLayer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -11,15 +13,16 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-[#F7F6F2] pt-28 sm:pt-36 pb-24 sm:pb-36 min-h-screen">
-      <div className="max-w-3xl mx-auto px-6 sm:px-10">
-        <div className="bg-white p-8 sm:p-14 border border-[#E8E6E1] space-y-8">
+    <div className="atmosphere-host relative isolate overflow-hidden bg-[#E8E6E1] pt-28 sm:pt-36 pb-24 sm:pb-36 min-h-screen">
+      <AtmosphereLayer ghost="Privacy" blueprint grid />
+      <div className="relative z-10 max-w-3xl mx-auto px-6 sm:px-10">
+        <div className="bg-[#FAF9F6] p-8 sm:p-14 border border-[#E8E6E1] space-y-8">
           <div>
-            <p className="text-[#C98A5B] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium mb-3">
+            <p className="text-[#0D2B4C] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium mb-3">
               Transparency
             </p>
             <h1 className="font-serif text-3xl sm:text-4xl text-[#1A1A1A] font-normal">
-              Privacy Policy
+              <SplitText text="Privacy Policy" />
             </h1>
           </div>
 
@@ -80,13 +83,18 @@ export default function PrivacyPage() {
               <div className="bg-[#FAF9F6] p-4 border border-[#E8E6E1] text-xs space-y-1">
                 <div>
                   <strong>Email:</strong>{" "}
-                  <a href="mailto:official@atalica.com.pk" className="text-[#C98A5B] underline">
+                  <a href="mailto:official@atalica.com.pk" className="text-[#0D2B4C] underline">
                     official@atalica.com.pk
+                  </a>
+                  <br />
+                  <strong>Email:</strong>{" "}
+                  <a href="mailto:official.atalica@gmail.com" className="text-[#0D2B4C] underline">
+                    official.atalica@gmail.com
                   </a>
                 </div>
                 <div>
                   <strong>Phone:</strong>{" "}
-                  <a href="tel:03051755566" className="text-[#C98A5B] underline font-mono">
+                  <a href="tel:03051755566" className="text-[#0D2B4C] underline font-mono">
                     0305 1755566
                   </a>
                 </div>
@@ -98,7 +106,7 @@ export default function PrivacyPage() {
             <Link href="/" className="text-[#1A1A1A] hover:text-[#C98A5B] uppercase tracking-wider">
               ← Return Home
             </Link>
-            <Link href="/consultation" className="text-[#C98A5B] hover:underline uppercase tracking-wider">
+            <Link href="/consultation" className="text-[#0D2B4C] hover:underline uppercase tracking-wider">
               Start a Project →
             </Link>
           </div>

@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import ResponsiveImage from "@/components/ResponsiveImage";
 import CTASection from "@/components/CTASection";
 import { getWhatsAppUrl } from "@/lib/whatsapp";
-import ScrollReveal from "@/components/ScrollReveal";
+import ScrollReveal from "@/components/motion/Reveal";
+import SplitText from "@/components/motion/SplitText";
+import ImageReveal from "@/components/motion/ImageReveal";
+import AtmosphereLayer from "@/components/atmosphere/AtmosphereLayer";
 
 export const metadata: Metadata = {
   title: "About Raheel Raza",
@@ -14,15 +17,16 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-[#F7F6F2] pt-28 sm:pt-36">
+    <div className="bg-[#E8E6E1] pt-28 sm:pt-36">
       {/* Editorial Header */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-16 sm:pb-24">
+      <section className="atmosphere-host relative isolate max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-16 sm:pb-24">
+        <AtmosphereLayer ghost="Studio" index="01" blueprint grid />
         <div className="max-w-3xl">
-          <p className="text-[#C98A5B] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium mb-5">
+          <p className="text-[#0D2B4C] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium mb-5">
             About ATALICA
           </p>
           <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal text-[#1A1A1A] leading-[1.08] tracking-tight mb-6">
-            A quiet approach to residential craft.
+            <SplitText text="A quiet approach to residential craft." />
           </h1>
           <p className="text-gray-600 text-sm sm:text-base font-light leading-relaxed max-w-xl">
             Founded by Raheel Raza, ATALICA brings together interior design, construction, and décor. Raheel has over 15 years of hands-on experience.
@@ -31,23 +35,26 @@ export default function AboutPage() {
       </section>
 
       {/* Main Editorial Composition: Portrait & Philosophy */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-24 sm:pb-32">
+      <section className="atmosphere-host relative isolate max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 pb-24 sm:pb-32 bg-[#F7F6F2]">
+        <AtmosphereLayer blueprint timeline />
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           {/* Portrait Column */}
           <ScrollReveal className="lg:col-span-5">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#E8E6E1]">
-              <ResponsiveImage
-                src="/images/optimized/founder/raheel.webp"
-                alt="Raheel Raza, Founder & Principal of ATALICA"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-cover object-top"
-              />
+              <ImageReveal className="absolute inset-0">
+                <ResponsiveImage
+                  src="/images/optimized/founder/raheel.webp"
+                  alt="Raheel Raza, Founder & Principal of ATALICA"
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-cover object-top"
+                />
+              </ImageReveal>
             </div>
             <div className="mt-5 space-y-1">
               <span className="font-serif text-xl text-[#1A1A1A] block">Raheel Raza</span>
-              <span className="text-[11px] text-[#C98A5B] uppercase tracking-[0.2em] font-montserrat font-medium block">
+              <span className="text-[11px] text-[#0D2B4C] uppercase tracking-[0.2em] font-montserrat font-medium block">
                 Founder & Principal
               </span>
               <p className="text-xs text-gray-500 font-light pt-1">
@@ -78,7 +85,7 @@ export default function AboutPage() {
 
             {/* Principles — Clean text list */}
             <div className="pt-6 border-t border-[#E8E6E1] space-y-5">
-              <p className="text-[#C98A5B] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium">
+              <p className="text-[#0D2B4C] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium">
                 Our Core Principles
               </p>
               <div className="space-y-4">
@@ -119,7 +126,7 @@ export default function AboutPage() {
                 href={getWhatsAppUrl("Hi Raheel, I would like to discuss a project.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C98A5B] hover:underline font-montserrat uppercase tracking-[0.18em] text-[11px] font-medium"
+                className="text-[#0D2B4C] hover:underline font-montserrat uppercase tracking-[0.18em] text-[11px] font-medium"
               >
                 Message Raheel on WhatsApp →
               </a>

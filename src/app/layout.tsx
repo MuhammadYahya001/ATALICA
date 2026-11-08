@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Montserrat, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { CustomCursor, MagneticEffect, PageTransition, Preloader, ScrollProgress } from "@/components/motion/StudioMotion";
+import MotionProvider from "@/components/motion/MotionProvider";
 import "./globals.css";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://atalica.com.pk"),
@@ -77,6 +92,10 @@ const jsonLd = {
   },
   telephone: "+923051755566",
   email: "official@atalica.com.pk",
+  contactPoint: [
+    { "@type": "ContactPoint", email: "official@atalica.com.pk", contactType: "customer service" },
+    { "@type": "ContactPoint", email: "official.atalica@gmail.com", contactType: "customer service" },
+  ],
   areaServed: [
     { "@type": "City", name: "Multan" },
     { "@type": "City", name: "Islamabad" },
@@ -92,7 +111,7 @@ export default function RootLayout({
   const gaId = process.env.NEXT_PUBLIC_GA_ID?.match(/^G-[A-Z0-9]+$/)?.[0];
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${montserrat.variable} ${playfair.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -118,10 +137,16 @@ export default function RootLayout({
         )}
       </head>
       <body className="antialiased min-h-screen flex flex-col bg-brand-offwhite text-brand-charcoal">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-        <WhatsAppButton variant="floating" />
+        <MotionProvider>
+          <Navbar />
+          <ScrollProgress />
+          <main className="flex-grow"><PageTransition>{children}</PageTransition></main>
+          <Footer />
+          <WhatsAppButton variant="floating" />
+          <Preloader />
+          <CustomCursor />
+          <MagneticEffect />
+        </MotionProvider>
       </body>
     </html>
   );

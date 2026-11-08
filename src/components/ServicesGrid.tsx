@@ -2,6 +2,7 @@ import ResponsiveImage from "@/components/ResponsiveImage";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Service } from "@/lib/services";
+import ImageReveal from "@/components/motion/ImageReveal";
 
 interface ServicesGridProps {
   services: Service[];
@@ -18,7 +19,7 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
         >
           <div>
             <div className="flex items-baseline justify-between mb-4">
-              <span className="text-[10px] text-[#C98A5B] font-montserrat tracking-[0.25em] font-medium">
+              <span className="text-[10px] text-[#0D2B4C] font-montserrat tracking-[0.25em] font-medium">
                 0{idx + 1}
               </span>
               <span className="text-[10px] text-gray-400 font-montserrat tracking-[0.2em] uppercase">
@@ -28,13 +29,15 @@ export default function ServicesGrid({ services }: ServicesGridProps) {
 
             {/* Image — clean editorial ratio */}
             <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#E8E6E1] mb-6">
-              <ResponsiveImage
-                src={service.image}
-                alt={`${service.title} project photograph by ATALICA`}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-              />
+              <ImageReveal className="absolute inset-0">
+                <ResponsiveImage
+                  src={service.image}
+                  alt={`${service.title} design inspiration image`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                />
+              </ImageReveal>
             </div>
 
             <h3 className="font-serif text-2xl text-[#1A1A1A] font-normal leading-snug mb-3 group-hover:text-[#0D2B4C] transition-colors">

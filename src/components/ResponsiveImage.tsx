@@ -50,7 +50,14 @@ export default function ResponsiveImage({ src, alt, sizes = "100vw", ...props }:
   return (
     <picture className="contents">
       {srcSet && <source srcSet={srcSet} sizes={sizes} type="image/webp" />}
-      <Image {...props} src={fallbackSources[src] ?? src} alt={alt} sizes={sizes} unoptimized />
+      <Image
+        {...props}
+        src={fallbackSources[src] ?? src}
+        alt={alt}
+        sizes={sizes}
+        className={`${props.className ?? ""} editorial-image`}
+        unoptimized
+      />
     </picture>
   );
 }
