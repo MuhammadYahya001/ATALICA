@@ -41,7 +41,7 @@ export default function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !isMenuRendered) return;
     const dialog = mobileNavigationRef.current;
     const firstControl = dialog?.querySelector<HTMLElement>("button, a[href]");
     firstControl?.focus();
@@ -59,7 +59,7 @@ export default function Navbar() {
     };
     document.addEventListener("keydown", trapFocus);
     return () => document.removeEventListener("keydown", trapFocus);
-  }, [isOpen]);
+  }, [isOpen, isMenuRendered]);
 
   useEffect(() => {
     if (isOpen) {
@@ -147,57 +147,59 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        <div
-          id="mobile-navigation"
-          ref={mobileNavigationRef}
-          hidden={!isMenuRendered}
-          aria-hidden={!isOpen}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-          className={`mobile-navigation lg:hidden fixed inset-x-0 top-16 sm:top-20 bottom-0 overflow-y-auto bg-[#081C33] text-white ${isOpen ? "mobile-menu-enter" : "mobile-menu-exit"}`}
-        >
-          <nav className="mx-auto flex min-h-full max-w-xl flex-col px-8 py-12" aria-label="Mobile Navigation">
-            <button type="button" onClick={() => setIsOpen(false)} className="mb-6 self-end text-[10px] uppercase tracking-[0.2em] text-white/65 hover:text-[#DBA075] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C98A5B]">
-              Close menu
-            </button>
-            {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  tabIndex={isOpen ? 0 : -1}
-                  style={{ animationDelay: `${NAV_LINKS.indexOf(link) * 70}ms` }}
-                  className={`mobile-nav-link font-serif text-3xl sm:text-4xl py-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C98A5B] ${
-                    isActive
-                      ? "text-[#DBA075]"
-                      : "text-white hover:text-[#DBA075]"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-            <div className="mt-auto border-t border-white/15 pt-8">
-              <Link
-                href="/consultation"
-                tabIndex={isOpen ? 0 : -1}
-                className="block w-full border border-[#C98A5B] py-4 text-center text-[11px] uppercase tracking-[0.2em] font-montserrat font-medium text-[#DBA075] transition-colors hover:bg-[#C98A5B] hover:text-[#081C33]"
-              >
-                Start a Project
-              </Link>
-              <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-white/65">
-                <a href="tel:03051755566">0305 1755566</a>
-                <a href="mailto:official@atalica.com.pk">official@atalica.com.pk</a>
-                <a href="mailto:official.atalica@gmail.com">official.atalica@gmail.com</a>
-                <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="text-[#DBA075]">WhatsApp</a>
-              </div>
-            </div>
-          </nav>
-        </div>
       </header>
+
+      {/* Keep the fixed drawer outside the transformed header so its viewport
+          height is calculated against the screen, not the 64px header. */}
+      <div
+        id="mobile-navigation"
+        ref={mobileNavigationRef}
+        hidden={!isMenuRendered}
+        aria-hidden={!isOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        className={`mobile-navigation lg:hidden fixed inset-x-0 top-16 z-[60] bottom-0 overflow-y-auto bg-[#081C33] text-white sm:top-20 ${isOpen ? "mobile-menu-enter" : "mobile-menu-exit"}`}
+      >
+        <nav className="mx-auto flex min-h-full max-w-xl flex-col px-8 py-12" aria-label="Mobile Navigation">
+          <button type="button" onClick={() => setIsOpen(false)} className="mb-6 self-end text-[10px] uppercase tracking-[0.2em] text-white/65 hover:text-[#DBA075] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C98A5B]">
+            Close menu
+          </button>
+          {NAV_LINKS.map((link, index) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                tabIndex={isOpen ? 0 : -1}
+                style={{ animationDelay: `${index * 70}ms` }}
+                className={`mobile-nav-link font-serif text-3xl sm:text-4xl py-3 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#C98A5B] ${
+                  isActive
+                    ? "text-[#DBA075]"
+                    : "text-white hover:text-[#DBA075]"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+          <div className="mt-auto border-t border-white/15 pt-8">
+            <Link
+              href="/consultation"
+              tabIndex={isOpen ? 0 : -1}
+              className="block w-full border border-[#C98A5B] py-4 text-center text-[11px] uppercase tracking-[0.2em] font-montserrat font-medium text-[#DBA075] transition-colors hover:bg-[#C98A5B] hover:text-[#081C33]"
+            >
+              Start a Project
+            </Link>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-[11px] text-white/65">
+              <a href="tel:03051755566">0305 1755566</a>
+              <a href="mailto:official@atalica.com.pk">official@atalica.com.pk</a>
+              <a href="mailto:official.atalica@gmail.com">official.atalica@gmail.com</a>
+              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="text-[#DBA075]">WhatsApp</a>
+            </div>
+          </div>
+        </nav>
+      </div>
     </>
   );
 }
