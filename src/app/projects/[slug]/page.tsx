@@ -59,7 +59,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </Link>
         <div className="max-w-4xl space-y-4">
           <p className="text-[#0D2B4C] text-[10px] sm:text-[11px] uppercase tracking-[0.28em] font-montserrat font-medium">
-            Design inspiration <span className="px-2 text-[#C98A5B]/50">/</span> {String(index + 1).padStart(2, "0")} ? 09
+            Design inspiration <span className="px-2 text-[#C98A5B]/50">/</span> {String(index + 1).padStart(2, "0")} / 09
           </p>
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-[#1A1A1A] leading-[1.1] tracking-tight">
             <SplitText text={project.title} />
@@ -83,7 +83,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         </ScrollReveal>
         <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8E6E1] pb-6">
           <p className="text-xs text-gray-500 font-light">{project.categoryLabel}</p>
-          <p className="text-[10px] text-gray-400 font-montserrat uppercase tracking-[0.18em]">ATALICA ? Design Inspiration</p>
+          <p className="text-[10px] text-gray-400 font-montserrat uppercase tracking-[0.18em]">ATALICA · Design Inspiration</p>
         </div>
 
         <nav aria-label="Project navigation" className="mt-8 grid grid-cols-2 gap-6">
